@@ -159,8 +159,25 @@ function getDiscountedTotal(products, category) {
 // Si no hay ninguno: "Ninguno"
 function getPassingSummary(students) {
   // Tu codigo aqui
-  return students.filter(s => s.grade >= 5).map(s => s.name).reduce((acc, el, i, total) => {
-    return i === total.length - 1
-    return acc + ", " + el
+  const names = students.filter(s => s.grade >= 5).map(s => s.name);   
+  if(names.length === 0){
+      return "Ninguno"
+  }
+
+  if(names.length === 1){
+    return names[0]
+  }
+
+  const string = names.reduce((acc, el, i) => {
+    if(i === 0){
+      acc = el
+    }else if(i === names.length -1){
+      acc += " y " + el
+    }else{
+      acc = acc + ", " + el
+    }
+    return acc
   }, "")
+
+  return string
 }
